@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+</head>
+<body>
+
+  <div class="jumbotron">
+    <p class="lead">Master Key Assistant</p>
+    <h1 class="display-5">2-Level System</h1>
+    <p>Ideal for small office and residential jobs</p>
+  </div>
+
+<div class="container">
+<form class="form-group">
+  <div class="container py-3">
+    <div class="alert alert-primary" data-toggle="tooltip" data-placement="top" title="Choose number of cuts">
+      <h3>Select Key Cut Length</h3>
+    </div>
+<!-- select key cut spaces -->
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="cutLengthRadios" id="cutLengthRadios1" value="5" checked>
+        <label class="form-check-label" for="cutLengthRadios1">
+          5 Cuts
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="cutLengthRadios" id="cutLengthRadios2" value="6">
+        <label class="form-check-label" for="cutLengthRadios2">
+          6 Cuts
+        </label>
+      </div>
+  </div>
+  <div class="container py-3">
+    <div class="alert alert-primary" data-toggle="tooltip" data-placement="top" title="Choose minimum and maximum pin size">
+      <h3>Select Pin Range</h3>
+    </div>
+<!-- select pin range, between 0-9 -->
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="pinRangeRadios" id="pinRangeRadios1" value="Default" checked>
+        <label class="form-check-label" for="pinRangeRadios1">
+          Default: Pins Range From 0 to 9
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="pinRangeRadios" id="pinRangeRadios2">
+        <label class="form-check-label" for="pinRangeRadios2">
+          Select Pin Range
+        </label>
+        <div class="row">
+          <div class="col-sm-2 pb-1">
+            <input type="number" id="minPinInput" class="form-control" placeholder="Min Pin Size" min="0" max="9" value="0">
+          </div>
+          <div class="col-sm-2">
+            <input type="number" id="maxPinInput" class="form-control" placeholder="Max Pin Size" min="0" max="9" value="9">
+          </div>
+        </div>
+      </div>
+  </div>
+<!-- Optional, select Maximum Adjacent Cut, none or 1-8 -->
+  <div class="container py-3">
+    <div class="alert alert-primary" data-toggle="tooltip" data-placement="top" title="MAC is the maximum variance allowed between adjacent cuts">
+      <h3>Select Maximum Adjacent Cut</h3>
+    </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="MACRadios" id="MACRadios1" value="0" checked>
+        <label class="form-check-label" for="MACRadios1">
+          None
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="MACRadios" id="MACRadios2" value="5" >
+        <label class="form-check-label" for="MACRadios2">
+          Select
+        </label>
+        <div class="row">
+          <div class="col-sm-4">
+            <input type="number" id="MACvalue" class="form-control" placeholder="Maximum Adjacent Cut" min="1" max="8" required>
+          </div>
+        </div>
+      </div>
+  </div>
+<!-- master key -->
+  <div class="container py-3">
+    <div class="alert alert-primary" data-toggle="tooltip" data-placement="top" title="Cuts for your master key">
+      <h3>Master Key</h3>
+    </div>
+    <p class="lead">Generate Random Cuts, or Manually Enter Cuts</p>
+      <!-- generate random cuts -->
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="MasterCutsRadios" id="MasterCutsRadios1" checked>
+        <label class="form-check-label" for="MasterCutsRadios1">
+          Randomly Generate Cuts
+        </label>
+      </div>
+      <!-- manually enter the cuts -->
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="MasterCutsRadios" id="MasterCutsRadios2" >
+        <label class="form-check-label" for="MasterCutsRadios2">
+          Enter Cuts
+        </label>
+        <div class="row">
+          <div class="col-sm-4">
+            <input type="number" required id="customMasterCuts" class="form-control" placeholder="Ex: 113525" min="00000" max="999999">
+          </div>
+          <div class="row">
+            <div id="warningDiv">
+            </div>
+
+          </div>
+        </div>
+      </div>
+  </div>
+        <!-- change key -->
+    <div class="container py-3">
+      <div class="alert alert-primary" data-toggle="tooltip" data-placement="top" title="Cuts will automatically be generated">
+        <h3>Change Key</h3>
+      </div>
+        <!-- select how many change keys are needed -->
+        <p class="lead">Enter Quantity of Different Change Keys</p>
+        <div class="row">
+          <div class="col-sm-4">
+            <input type="number" id="changeKeyQuantity" class="form-control" placeholder="1" value="1" min="1" max="50">
+          </div>
+        </div>
+      <button id="resultsButton" type="button" class="btn btn-primary btn-lg mt-3">Submit</button>
+      <button id="resetButton" type="button" class="btn btn-danger btn-lg mt-3">Reset</button>
+    </div>
+
+  </form>
+</div>
+
+<div class="container my-3" id="results">
+
+</div>
+
+<div class="container" >
+  <div class="card-columns" id="results2">
+
+  </div>
+
+</div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+        $('#MasterCutsRadios2').click(function() {
+           if($('#MasterCutsRadios2').is(':checked')) {
+           let warningDiv = `<div class="alert alert-warning my-2" role="alert">
+                              WARNING: MAC is not checked for custom Master Key Cuts entries.
+                               MAC will still be enforced on change keys if a MAC was entered.
+                            </div>`;
+          document.getElementById("warningDiv").innerHTML = warningDiv;
+             }
+
+      });
+
+      });
+    </script>
+  </body>
+</html>
